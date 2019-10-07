@@ -1,9 +1,11 @@
-window.renderStatistics = function(ctx, names, times) {
+'use strict';
+
+window.renderStatistics = function (ctx, names, times) {
   renderCloud(ctx, 100, 10);
   renderColumns(ctx, names, times);
 };
 
-var renderCloud = function(ctx, x, y) {
+var renderCloud = function (ctx, x, y) {
   var cloudWidth = 400;
   var cloudHeight = 250;
   var shadowOffset = 10;
@@ -28,22 +30,22 @@ var renderCloud = function(ctx, x, y) {
 var getRandomInt = function (min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min; //Максимум не включается, минимум включается
+  return Math.floor(Math.random() * (max - min)) + min; // Максимум не включается, минимум включается
 };
 
-var getMaxOfArray = function(numArray) {
+var getMaxOfArray = function (numArray) {
   return Math.max.apply(null, numArray);
 };
 
-var getColumnColor = function(name) {
-  return name === 'Вы' ? 'rgba(255, 0, 0, 1)' : 'hsl(195, '+getRandomInt(10, 100)+'%, 50%)';
+var getColumnColor = function (name) {
+  return name === 'Вы' ? 'rgba(255, 0, 0, 1)' : 'hsl(195, ' + getRandomInt(10, 100) + '%, 50%)';
 };
 
-var getColumnHeight = function(maxHeight, coef) {
-  return maxHeight * coef
+var getColumnHeight = function (maxHeight, coef) {
+  return maxHeight * coef;
 };
 
-var renderColumn = function(ctx, name, time, coef, index) {
+var renderColumn = function (ctx, name, time, coef, index) {
   var startX = 145;
   var startY = 90;
   var maxHeight = 150;
@@ -62,15 +64,13 @@ var renderColumn = function(ctx, name, time, coef, index) {
   ctx.fillText(name, x, y + height + 15);
 };
 
-var renderColumns = function(ctx, names, times) {
-  console.log(names, times);
-
-  for (let i = 0; i < names.length; i++) {
+var renderColumns = function (ctx, names, times) {
+  for (var i = 0; i < names.length; i++) {
     var name = names[i];
     var time = times[i];
 
     var maxTime = getMaxOfArray(times);
 
-    renderColumn(ctx, name, time, time / maxTime, i)
+    renderColumn(ctx, name, time, time / maxTime, i);
   }
 };
