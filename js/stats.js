@@ -27,6 +27,10 @@ var renderCloud = function (ctx, x, y) {
   ctx.fillText(cloudTextSecond, x + padding, y + padding * 2);
 };
 
+window.getRandomArrayElement = function (arr) {
+  return arr[Math.floor(arr.length * Math.random())];
+};
+
 var getRandomInt = function (min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);

@@ -1,4 +1,7 @@
 'use strict';
+var setupWindow = document.querySelector('.setup');
+var setupOpenButton = document.querySelector(' .setup-open');
+var setupCloseButton = document.querySelector(' .setup-close');
 
 var names = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var lastnames = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
@@ -65,3 +68,35 @@ renderWizards();
 
 document.querySelector('.setup').classList.remove('hidden');
 document.querySelector('.setup-similar').classList.remove('hidden');
+
+
+var openSettings = function () {
+  setupWindow.classList.remove('hidden');
+};
+
+var closeSettings = function () {
+  setupWindow.classList.add('hidden');
+};
+
+setupOpenButton.addEventListener('click', openSettings);
+setupCloseButton.addEventListener('click', closeSettings);
+
+setupOpenButton.addEventListener('keydown', function (e) {
+  switch (e.code) {
+    case 'Escape': {
+      if (!e.target.classList.contains('setup-user-name')) {
+        closeSettings();
+      }
+      break;
+    }
+
+    case 'Enter': {
+      if (e.target.classList.contains('setup-open-icon')) {
+        openSettings();
+      }
+      break;
+    }
+  }
+});
+
+
