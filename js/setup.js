@@ -1,102 +1,16 @@
 'use strict';
-var setupWindow = document.querySelector('.setup');
-var setupOpenButton = document.querySelector(' .setup-open');
-var setupCloseButton = document.querySelector(' .setup-close');
 
-var names = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
-var lastnames = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
-var coatColors = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
-var eyesColors = ['black', 'red', 'blue', 'yellow', 'green'];
+(function () {
 
-var getRandomArrayElement = function (array) {
-  return array[Math.floor(array.length * Math.random())];
-};
+  var userDialog = document.querySelector('.setup');
+  var wizardCoat = userDialog.querySelector('.wizard-coat');
+  var coatColorInput = userDialog.querySelector('input[name=coat-color]');
+  var wizardEyes = userDialog.querySelector('.wizard-eyes');
+  var eyesColorInput = userDialog.querySelector('input[name=eyes-color]');
+  var wizardFireball = userDialog.querySelector('.setup-fireball-wrap');
+  var fireballColorInput = userDialog.querySelector('input[name=fireball-color]');
 
-var wizards = [
-  {
-    name: getRandomArrayElement(names),
-    lastname: getRandomArrayElement(lastnames),
-    coatColor: getRandomArrayElement(coatColors),
-    eyesColor: getRandomArrayElement(eyesColors)
-  },
-  {
-    name: getRandomArrayElement(names),
-    lastname: getRandomArrayElement(lastnames),
-    coatColor: getRandomArrayElement(coatColors),
-    eyesColor: getRandomArrayElement(eyesColors)
-  },
-  {
-    name: getRandomArrayElement(names),
-    lastname: getRandomArrayElement(lastnames),
-    coatColor: getRandomArrayElement(coatColors),
-    eyesColor: getRandomArrayElement(eyesColors)
-  },
-  {
-    name: getRandomArrayElement(names),
-    lastname: getRandomArrayElement(lastnames),
-    coatColor: getRandomArrayElement(coatColors),
-    eyesColor: getRandomArrayElement(eyesColors)
-  }
-];
-
-var renderWizard = function (wizard) {
-  var wizardTemplate = document.querySelector('#similar-wizard-template')
-    .content
-    .querySelector('.setup-similar-item');
-  var wizardElement = wizardTemplate.cloneNode(true);
-
-  wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
-  wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
-  wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
-
-  return wizardElement;
-};
-
-var renderWizards = function () {
-  var similarListElement = document.querySelector('.setup-similar-list');
-  var fragment = document.createDocumentFragment();
-
-  for (var i = 0; i < wizards.length; i++) {
-    var wizard = wizards[i];
-    fragment.appendChild(renderWizard(wizard));
-  }
-
-  similarListElement.appendChild(fragment);
-};
-
-renderWizards();
-
-document.querySelector('.setup').classList.remove('hidden');
-document.querySelector('.setup-similar').classList.remove('hidden');
-
-
-var openSettings = function () {
-  setupWindow.classList.remove('hidden');
-};
-
-var closeSettings = function () {
-  setupWindow.classList.add('hidden');
-};
-
-setupOpenButton.addEventListener('click', openSettings);
-setupCloseButton.addEventListener('click', closeSettings);
-
-setupOpenButton.addEventListener('keydown', function (e) {
-  switch (e.code) {
-    case 'Escape': {
-      if (!e.target.classList.contains('setup-user-name')) {
-        closeSettings();
-      }
-      break;
-    }
-
-    case 'Enter': {
-      if (e.target.classList.contains('setup-open-icon')) {
-        openSettings();
-      }
-      break;
-    }
-  }
-});
-
-
+  window.colorize(wizardCoat, coatColorInput, window.util.COATCOLORS);
+  window.colorize(wizardEyes, eyesColorInput, window.util.EYESCOLORS);
+  window.colorize(wizardFireball, fireballColorInput, window.util.FIREBALLCOLORS);
+})();
